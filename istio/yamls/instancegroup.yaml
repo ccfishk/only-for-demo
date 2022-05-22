@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: addon-istio-installer-ns
+---
+apiVersion: instancemgr.keikoproj.io/v1alpha1
+kind: InstanceGroup
+metadata:
+  annotations:
+    instancemgr.keikoproj.io/default-labels: node.kubernetes.io/role=istio,node.kubernetes.io/instancegroup=istio
+  name: istio
+  namespace: addon-istio-installer-ns
+spec:
+  eks:
+    minSize: 4
+    maxSize: 12
+    configuration:
+      volumes:
+      - name: /dev/xvda
+        type: gp2
+        size: 128
+      taints:
+      - key: ig/istiocontrol
+        effect: NoSchedule
+      - key: ig/istiocontrol
+        effect: NoExecute
+      instanceType: "m5.xlarge"
+      tags:
+      - key: eks.k8s.io/instancegroup
+        value: istio
+      - key: Namespace
+        value: addon-istio-installer-ns
+      - key: 'intuit:asset_id'
+        value: '4615081310646958673'

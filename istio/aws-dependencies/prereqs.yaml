@@ -1,0 +1,201 @@
+apiVersion: addons.intuit.k8s.io/v1alpha1
+kind: Prereqs
+spec:
+  resources:
+    - name: "jimin-argo-mesh-istio-pilot"
+      type: iam-assume-role-policy
+      data: |
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: ec2.amazonaws.com
+          Action: sts:AssumeRole
+        - Effect: Allow
+          Principal:
+            AWS: arn:aws:iam::663374536332:role/iks-jimin-argo-mesh-kiam-role
+          Action: sts:AssumeRole
+    - name: "jimin-argo-mesh-istio-mixer"
+      type: iam-assume-role-policy
+      data: |
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: ec2.amazonaws.com
+          Action: sts:AssumeRole
+        - Effect: Allow
+          Principal:
+            AWS: arn:aws:iam::663374536332:role/iks-jimin-argo-mesh-kiam-role
+          Action: sts:AssumeRole
+    - name: "jimin-argo-mesh-istio-galley"
+      type: iam-assume-role-policy
+      data: |
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: ec2.amazonaws.com
+          Action: sts:AssumeRole
+        - Effect: Allow
+          Principal:
+            AWS: arn:aws:iam::663374536332:role/iks-jimin-argo-mesh-kiam-role
+          Action: sts:AssumeRole
+    - name: "jimin-argo-mesh-istio-config-auth"
+      type: iam-assume-role-policy
+      data: |
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: ec2.amazonaws.com
+          Action: sts:AssumeRole
+        - Effect: Allow
+          Principal:
+            AWS: arn:aws:iam::663374536332:role/iks-jimin-argo-mesh-kiam-role
+          Action: sts:AssumeRole
+    - name: "jimin-argo-mesh-istio-ingressgateway"
+      type: iam-assume-role-policy
+      data: |
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: ec2.amazonaws.com
+          Action: sts:AssumeRole
+        - Effect: Allow
+          Principal:
+            AWS: arn:aws:iam::663374536332:role/iks-jimin-argo-mesh-kiam-role
+          Action: sts:AssumeRole
+    - name: "jimin-argo-mesh-istio-oim-wavefront"
+      type: iam-assume-role-policy
+      data: |
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: ec2.amazonaws.com
+          Action: sts:AssumeRole
+        - Effect: Allow
+          Principal:
+            AWS: arn:aws:iam::663374536332:role/iks-jimin-argo-mesh-kiam-role
+          Action: sts:AssumeRole
+      policy:
+        - name: "istio-oim-wavefront"
+          type: iam-role-policy
+          data: |
+            Version: '2012-10-17'
+            Statement:
+            - Effect: Allow
+              Action:
+              - s3:PutObject
+              - s3:PutObjectAcl
+              Resource:
+              - "arn:aws:s3:::intu-oim*"
+            - Effect: Allow
+              Action:
+              - s3:GetObject
+              Resource:
+              - "arn:aws:s3:::pice-yum-repo*"
+            - Effect: Allow
+              Action:
+              - ec2:DescribeTags
+              Resource:
+              - "*"
+    - name: "jimin-argo-mesh-istio-quartermaster"
+      type: iam-assume-role-policy
+      data: |
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: ec2.amazonaws.com
+          Action: sts:AssumeRole
+        - Effect: Allow
+          Principal:
+            AWS: arn:aws:iam::663374536332:role/iks-jimin-argo-mesh-kiam-role
+          Action: sts:AssumeRole
+    - name: "jimin-argo-mesh-istio-healthcheck"
+      type: iam-assume-role-policy
+      data: |
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: ec2.amazonaws.com
+          Action: sts:AssumeRole
+        - Effect: Allow
+          Principal:
+            AWS: arn:aws:iam::663374536332:role/iks-jimin-argo-mesh-kiam-role
+          Action: sts:AssumeRole
+    - name: "jimin-argo-mesh-istio-dynamic-routing"
+      type: iam-assume-role-policy
+      data: |
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: ec2.amazonaws.com
+          Action: sts:AssumeRole
+        - Effect: Allow
+          Principal:
+            AWS: arn:aws:iam::663374536332:role/iks-jimin-argo-mesh-kiam-role
+          Action: sts:AssumeRole
+    - name: "jimin-argo-mesh-istio-sidecar-injector"
+      type: iam-assume-role-policy
+      data: |
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: ec2.amazonaws.com
+          Action: sts:AssumeRole
+        - Effect: Allow
+          Principal:
+            AWS: arn:aws:iam::663374536332:role/iks-jimin-argo-mesh-kiam-role
+          Action: sts:AssumeRole
+    - name: "istio-installer-role-jimin-argo-mesh"
+      type: iam-assume-role-policy
+      data: |
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: ec2.amazonaws.com
+          Action: sts:AssumeRole
+        - Effect: Allow
+          Principal:
+            AWS: arn:aws:iam::663374536332:role/iks-jimin-argo-mesh-kiam-role
+          Action: sts:AssumeRole
+        - Effect: Allow
+          Principal:
+            Federated: "arn:aws:iam::663374536332:oidc-provider/oidc.eks.us-west-2.amazonaws.com/id/45C3413B806F4958E5BE9A1F9C2D4968"
+          Action: sts:AssumeRoleWithWebIdentity
+          Condition:
+            StringEquals:
+              "oidc.eks.us-west-2.amazonaws.com/id/45C3413B806F4958E5BE9A1F9C2D4968:sub": "system:serviceaccount:addon-istio-installer-ns:istio-installer"
+      policy:
+        - name: "istio-installer-policy"
+          type: iam-role-policy
+          data: |
+            Version: '2012-10-17'
+            Statement:
+            - Effect: Allow
+              Action:
+              - "*"
+              Resource:
+              - "*"
+    - name: "iks-jimin-argo-mesh-istio-node-role"
+      type: iam-assume-role-policy-with-managed-policies
+      data: |
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: ec2.amazonaws.com
+          Action: sts:AssumeRole
+      managedPolicies:
+        - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
+        - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+        - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+        - arn:aws:iam::663374536332:policy/intuit-ssm-policy
