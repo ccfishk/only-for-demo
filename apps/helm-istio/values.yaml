@@ -1,0 +1,11 @@
+# Default values for helm-istio.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+env:
+  clusterName: jimin-argo-mesh
+  addonVersion: v2.1.10
+  istioVersion: 1.10.43
+
+intuit:
+  asset_id: "4615081310646958673"
