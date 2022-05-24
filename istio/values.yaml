@@ -11,4 +11,4 @@ env:
   avisoHost: aviso-e2e.api.intuit.com
 
 intuit:
-  assetId: "4615081310646958673"
+  assetId: 4615081310646958673
