@@ -9,27 +9,25 @@ spec:
     - name: aviso-secret
   pkgChannel: istio-installer
   pkgName: istio-addon
-  pkgVersion: v2.1.10
+  pkgVersion: {{ .Values.env.addonVersion }}
   pkgType: composite
   pkgDeps:
     prometheus: "*"
   pkgDescription: istio addon
   params:
-    namespace: addon-istio-installer-ns
+    namespace: {{ .Values.env.installerNamespace }}
     context:
-      {{- if .Values.env.clusterName }}
       clusterName: {{ .Values.env.clusterName }}
-      {{- end }}
-      clusterRegion: us-west-2
+      clusterRegion: {{ .Values.env.clusterRegion }}
     data:
       iamrole: jimin-argo-mesh-istio-pilot
       vpcId: vpc-0787dd745fc6734d7
       clusterPrivateSubnets: >-
         [subnet-07bb649ff2be8975e subnet-0a441e7896b75e192
         subnet-0521c90adccd8b37d]
-      addon_version: v2.1.10
-      mesh_version: 1.10.43
-      aviso_host: aviso-e2e.api.intuit.com
+      addon_version: {{ .Values.env.addonVersion }}
+      mesh_version: {{ .Values.env.istioVersion }}
+      aviso_host: {{ .Values.env.avisoHost }}
   lifecycle:
     prereqs:
       template: |

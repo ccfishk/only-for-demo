@@ -4,8 +4,11 @@
 
 env:
   clusterName: jimin-argo-mesh
+  clusterRegion: us-west-2
+  installerNamespace: addon-istio-installer-ns
   addonVersion: v2.1.10
   istioVersion: 1.10.43
+  avisoHost: aviso-e2e.api.intuit.com
 
 intuit:
   assetId: "4615081310646958673"
