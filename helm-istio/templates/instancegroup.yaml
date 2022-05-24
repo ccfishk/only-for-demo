@@ -24,6 +24,4 @@ spec:
         - key: Namespace
           value: addon-istio-installer-ns
         - key: "intuit:asset_id"
-          {{- if .Values.intuit.assetId }}
           value: {{ .Values.intuit.assetId }}
-          {{- end }}

@@ -8,4 +8,4 @@ env:
   istioVersion: 1.10.43
 
 intuit:
-  asset_id: "4615081310646958673"
+  assetId: "4615081310646958673"
