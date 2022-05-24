@@ -24,4 +24,5 @@ spec:
         - key: Namespace
           value: addon-istio-installer-ns
         - key: "intuit:asset_id"
-          value: {{ .Values.intuit.assetId }}
+          value: "4615081310646958673"
+          #value: {{ .Values.intuit.assetId }}
