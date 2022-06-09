@@ -35,7 +35,7 @@ spec:
             - name: VPC_ID
               value: {{ .Values.env.vpcID }}
             - name: PRIVATE_SUBNETS
-              value: {{ .Values.env.privateSubnetes }}
+              value: '[subnet-07bb649ff2be8975e subnet-0a441e7896b75e192 subnet-0521c90adccd8b37d]'
             - name: IKS_VERSION
               value: {{ .Values.env.iksVersion }}
           image: docker.intuit.com/services/mesh/mesh-aviso/service/ballast:{{ .Values.istioInstallerImage.tag }}
