@@ -1,13 +1,24 @@
-# Default values for helm-istio.
+# Default values for istio.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
+istioInstallerImage:
+  repository: docker.intuit.com/services/mesh/mesh-aviso/service/ballast
+  tag: v2.1.10
+  pullPolicy: Always
 
 env:
-  clusterName: jimin-argo-mesh
-  clusterRegion: us-west-2
+  meshVersion: 1.10.42
+  clusterName: ip-fmea1-e2e-usw2-k8s
+  awsRegion: us-west-2
+  clusterEnv: preprod
+  clusterShortName: ip-fmea1-e2e-usw2-k8s
+  accountNumber: 681402570415
+  apiServerURL: https://eksapi-ip-fmea1-e2e-usw2-k8s-42ae96c70794d730.elb.us-west-2.amazonaws.com
   installerNamespace: addon-istio-installer-ns
   addonVersion: v2.1.10
-  istioVersion: 1.10.43
+  vpcID: vpc-0c728f744fb62c0c4
+  iksVersion: v2.17.6
+  privateSubnetes: "[subnet-0f15d1989fdb0de53 subnet-0a4661dfb70772f39 subnet-0a9f4a492da03e0fa]"
   avisoHost: aviso-e2e.api.intuit.com
 
 intuit:

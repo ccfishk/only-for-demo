@@ -1,0 +1,69 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  labels:
+    app: istio-installer
+    app.kubernetes.io/managed-by: addonmgr.keikoproj.io
+    app.kubernetes.io/name: istio
+    app.kubernetes.io/part-of: istio
+    app.kubernetes.io/version: {{ Values.istioInstallerImage.tag }}
+  name: istio-installer
+  namespace: addon-istio-installer-ns
+spec:
+  template:
+    metadata:
+      labels:
+        app: istio-installer
+        job-name: istio-installer
+    spec:
+      containers:
+        - env:
+            - name: MESH_VERSION
+              value: {{ Values.env.meshVersion }}
+            - name: AWS_REGION
+              value: {{ Values.env.awsRegion }}
+            - name: CLUSTER_NAME
+              value: {{ Values.env.clusterName }}
+            - name: CLUSTER_ENV
+              value: {{ Values.env.clusterEnv }}
+            - name: CLUSTER_SHORT_NAME
+              value: {{ Values.env.clusterName }}
+            - name: ACCOUNT_NUMBER
+              value: {{ Values.env.accountNumber }}
+            - name: API_SERVER_URL
+              value: {{ Values.env.apiServerURL }}
+            - name: VPC_ID
+              value: {{ Values.env.vpcID }}
+            - name: PRIVATE_SUBNETS
+              value: {{ Values.env.privateSubnetes }}
+            - name: IKS_VERSION
+              value: {{ Values.env.iksVersion }}
+          image: docker.intuit.com/services/mesh/mesh-aviso/service/ballast:{{ Values.istioInstallerImage.tag }}
+          imagePullPolicy: Always
+          name: istio-installer
+          resources:
+            limits:
+              cpu: "1"
+              memory: 1Gi
+            requests:
+              cpu: 300m
+              memory: 500Mi
+          volumeMounts:
+            - mountPath: /etc/ssl/certs/ca-certificates.crt
+              name: ssl-certs
+              readOnly: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Never
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 65534
+      serviceAccount: istio-installer
+      serviceAccountName: istio-installer
+      terminationGracePeriodSeconds: 30
+      securityContext:
+        fsGroup: 65534
+      volumes:
+        - hostPath:
+            path: /etc/ssl/certs/ca-bundle.crt
+            type: ""
+          name: ssl-certs
