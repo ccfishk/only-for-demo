@@ -29,7 +29,7 @@ spec:
             - name: CLUSTER_SHORT_NAME
               value: {{ .Values.env.clusterName }}
             - name: ACCOUNT_NUMBER
-              value: {{ .Values.env.accountNumber }}
+              value: "681402570415"
             - name: API_SERVER_URL
               value: {{ .Values.env.apiServerURL }}
             - name: VPC_ID
