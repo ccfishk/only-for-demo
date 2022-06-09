@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/managed-by: addonmgr.keikoproj.io
     app.kubernetes.io/name: istio
     app.kubernetes.io/part-of: istio
-    app.kubernetes.io/version: {{ Values.istioInstallerImage.tag }}
+    app.kubernetes.io/version: {{ .Values.istioInstallerImage.tag }}
   name: istio-installer
   namespace: addon-istio-installer-ns
 spec:
@@ -19,26 +19,26 @@ spec:
       containers:
         - env:
             - name: MESH_VERSION
-              value: {{ Values.env.meshVersion }}
+              value: {{ .Values.env.meshVersion }}
             - name: AWS_REGION
-              value: {{ Values.env.awsRegion }}
+              value: {{ .Values.env.awsRegion }}
             - name: CLUSTER_NAME
-              value: {{ Values.env.clusterName }}
+              value: {{ .Values.env.clusterName }}
             - name: CLUSTER_ENV
-              value: {{ Values.env.clusterEnv }}
+              value: {{ .Values.env.clusterEnv }}
             - name: CLUSTER_SHORT_NAME
-              value: {{ Values.env.clusterName }}
+              value: {{ .Values.env.clusterName }}
             - name: ACCOUNT_NUMBER
-              value: {{ Values.env.accountNumber }}
+              value: {{ .Values.env.accountNumber }}
             - name: API_SERVER_URL
-              value: {{ Values.env.apiServerURL }}
+              value: {{ .Values.env.apiServerURL }}
             - name: VPC_ID
-              value: {{ Values.env.vpcID }}
+              value: {{ .Values.env.vpcID }}
             - name: PRIVATE_SUBNETS
-              value: {{ Values.env.privateSubnetes }}
+              value: {{ .Values.env.privateSubnetes }}
             - name: IKS_VERSION
-              value: {{ Values.env.iksVersion }}
-          image: docker.intuit.com/services/mesh/mesh-aviso/service/ballast:{{ Values.istioInstallerImage.tag }}
+              value: {{ .Values.env.iksVersion }}
+          image: docker.intuit.com/services/mesh/mesh-aviso/service/ballast:{{ .Values.istioInstallerImage.tag }}
           imagePullPolicy: Always
           name: istio-installer
           resources:
