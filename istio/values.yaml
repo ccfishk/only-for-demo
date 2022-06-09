@@ -12,7 +12,7 @@ env:
   awsRegion: us-west-2
   clusterEnv: preprod
   clusterShortName: jimin-argo-mesh
-  accountNumber: 681402570415
+  accountNumber: "681402570415"
   apiServerURL: https://eksapi-jimin-argo-mesh-36b18be574427492.elb.us-west-2.amazonaws.com
   installerNamespace: addon-istio-installer-ns
   addonVersion: v2.1.10
